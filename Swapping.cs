@@ -17,6 +17,6 @@ public class Swap
         int c = a;
         a = b;
         b = c;
-        Console.WriteLine("The swapped value of a and b is {0} {1}", a, b);
+        Console.WriteLine("The swapped value of a is {0} b is {1}", a, b);
     }
 }
