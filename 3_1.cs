@@ -1,19 +1,98 @@
-﻿'Assignment3.exe' (CoreCLR: DefaultDomain): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Private.CoreLib.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'F:\Assignment3\Assignment3\bin\Debug\net6.0\Assignment3.dll'. Symbols loaded.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Runtime.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'c:\program files\microsoft visual studio\2022\community\common7\ide\commonextensions\microsoft\hotreload\Microsoft.Extensions.DotNetDeltaApplier.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.IO.Pipes.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Linq.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Collections.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Console.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Threading.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Threading.Overlapped.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Security.AccessControl.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Security.Principal.Windows.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Runtime.InteropServices.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Security.Claims.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\Microsoft.Win32.Primitives.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Runtime.Loader.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Text.Encoding.Extensions.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'Assignment3.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Collections.Concurrent.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-The program '[9840] Assignment3.exe' has exited with code 0 (0x0).
+using System;
+
+    interface IPrintable
+    {
+        void DisplayEmployeeDetails();
+    }
+    class Employee : IPrintable
+    {
+           private string firstName;
+           private string lastName;
+           protected float netSalary;
+           protected float grossSalary;
+
+    protected Employee()
+        {
+            this.firstName = "";
+            this.lastName = "";   
+            this.netSalary = 0.0F;
+            this.grossSalary = 0.0F;
+        }
+
+        protected Employee(string fName, string lName,  float salary)
+        {
+            this.firstName = fName;
+            this.lastName = lName;
+            this.netSalary = salary;
+        }
+
+        public virtual void CalculateSalary()
+        {
+            
+        }
+
+        public void DisplayEmployeeDetails()
+        {
+            Console.WriteLine("EMPLOYEE DETAILS:\n");
+            Console.WriteLine("Name: {0} {1}", this.firstName, this.lastName);
+           
+            Console.WriteLine("Net Salary: {0}", this.netSalary);
+            Console.WriteLine("Gross Salary: {0}\n", this.grossSalary);
+        }
+    }
+
+    class Manager : Employee
+    {
+        private float petrolAllowance;
+        private float foodAllowance;
+        private float otherAllowance;
+
+
+
+        public Manager(string fName, string lName, string designation, float salary) : base(fName, lName,  salary)
+        {
+            this.petrolAllowance = 0.08F;
+            this.foodAllowance = 0.13F;
+            this.otherAllowance = 0.03F;
+        }
+
+        public override void CalculateSalary()
+        {
+            grossSalary = (1 + petrolAllowance + foodAllowance + otherAllowance) * netSalary;
+
+        }
+    }
+
+    class MarketingExecutive : Employee
+    {
+        private float kilometerTravel, tourAllowance;
+        private int telephoneAllowance;
+
+        public MarketingExecutive(string fName, string lName,  float salary, float kilometers) : base(fName, lName,  salary)
+        {
+            this.kilometerTravel = kilometers;
+            tourAllowance = 5 * this.kilometerTravel;
+            telephoneAllowance = 1000;
+        }
+
+        public override void CalculateSalary()
+        {
+            grossSalary = netSalary + kilometerTravel + tourAllowance + telephoneAllowance;
+        }
+    }
+
+    class EmployeeManagement
+    {
+        static void Main()
+        {
+            Employee obj;
+            obj = new Manager("anshika", "jain","manager", 53421);
+            obj.CalculateSalary();
+            obj.DisplayEmployeeDetails();
+
+            obj = new MarketingExecutive("Adit", "Singh",  35425, 15);
+            obj.CalculateSalary();
+            obj.DisplayEmployeeDetails();
+        }
+    }
+
