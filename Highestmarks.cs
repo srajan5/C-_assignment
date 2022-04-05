@@ -10,24 +10,9 @@ public class Highest_Marks
             Console.WriteLine("Enter Avg marks:");
             marks[i]= Convert.ToInt32( Console.ReadLine());
             a=Math.Max(a,marks[i]);
-
-
         }
         Console.WriteLine("The Highest Marks is {0}", a);
-
-
-
-
-
     }
 
-
-
-
-
-
-
-
-
-     }
+    }
 
