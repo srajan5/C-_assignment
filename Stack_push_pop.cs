@@ -1,19 +1,65 @@
-﻿'stack2.exe' (CoreCLR: DefaultDomain): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Private.CoreLib.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'F:\stack2\stack2\bin\Debug\net6.0\stack2.dll'. Symbols loaded.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Runtime.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'c:\program files\microsoft visual studio\2022\community\common7\ide\commonextensions\microsoft\hotreload\Microsoft.Extensions.DotNetDeltaApplier.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.IO.Pipes.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Linq.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Collections.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Console.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Threading.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Threading.Overlapped.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Security.AccessControl.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Security.Principal.Windows.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Runtime.InteropServices.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Security.Claims.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\Microsoft.Win32.Primitives.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Runtime.Loader.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Text.Encoding.Extensions.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-'stack2.exe' (CoreCLR: clrhost): Loaded 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.3\System.Collections.Concurrent.dll'. Skipped loading symbols. Module is optimized and the debugger option 'Just My Code' is enabled.
-The program '[22592] stack2.exe' has exited with code 0 (0x0).
+using System;
+using System.Collections;
+
+    interface ICloneable
+    {
+        void Push();
+        void Pop();
+    }
+    public class MyStack : ICloneable
+    {
+        private List<int> stack = new List<int>();
+        private int _top;
+        public int Top { get { return _top; } set { this._top = value; } }
+        private int _stackSize;
+        public int StackSize { get { return _stackSize; } set { this._stackSize = value; } }
+
+        public void Push()
+        {
+            
+            if (stack.Count == _stackSize)
+            {
+                Console.WriteLine("Full Stack");
+                return;
+            }
+            stack.Add(this._top);
+        }
+        public void Pop()
+        {
+            if (stack.Count == 0)
+            {
+                Console.WriteLine("Empty Stack");
+                return;
+            }
+            stack.RemoveAt(stack.Count - 1);
+        }
+
+        public void DisplayStack()
+        {
+            foreach (int S in stack)
+            {
+                Console.WriteLine("The size of the Stack is {0}",StackSize);
+                Console.WriteLine("Displaying the stack ");
+                Console.WriteLine(S);
+            }
+        }
+    }
+    public class Program
+    {
+        public static void Main()
+        {
+            MyStack s = new MyStack();
+            s.StackSize = 5;
+            Console.WriteLine("pushed and popped items");
+            s.Top = 15;
+            s.Push();
+            s.Top = 23;
+            s.Push(); 
+            s.DisplayStack();
+            s.Pop();
+            
+
+        }
+    }
+
+
